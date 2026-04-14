@@ -72,7 +72,7 @@ Assignment_UI/
 
 ```bash
 # Clone the repository
-git clone <your-repo-url>
+git clone <https://github.com/soumyatiw/GStake_UI>
 cd Assignment_UI
 
 # Install dependencies
