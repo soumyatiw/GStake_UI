@@ -1,0 +1,191 @@
+/* =========================================================
+   PropertyCard.module.css
+   ========================================================= */
+
+/* ── Outer wrapper — pulls card up to overlap hero bottom ── */
+.wrapper {
+  position: relative;
+  z-index: 10;
+  max-width: 1100px;
+  margin: 0px auto 0;   /* negative margin overlaps the hero */
+  padding: 0 var(--space-6);
+  /* On mobile we reset the negative margin so there's no overlap */
+}
+
+/* ── Two-column card shell ── */
+.card {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  border-radius: 16px;
+  overflow: visible;
+}
+
+/* ── Left image panel ── */
+.imagePanel {
+  position: relative;
+  height: 360px;
+  overflow: hidden;
+  border-radius: 16px 16px 16px 16px;
+  cursor: pointer;
+
+}
+
+/* Villa photo */
+.propertyImage {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.4s ease;
+  opacity: 0.7;
+  box-shadow: 0 8px 6px -6px black;
+}
+
+.imagePanel:hover .propertyImage {
+  transform: scale(1.02);
+}
+
+/* Jigsaw overlay — sits directly on top of villa photo, full cover */
+.jigsawOverlay {
+  position: absolute;
+  top: 150px;
+  left: 340px;
+  z-index: 15;
+}
+
+/* ── Right info panel ── */
+.infoPanel {
+  border-radius: 0 16px 16px 0;
+  padding: 30px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-4);
+  /* JS sets initial opacity/transform for slide-in */
+  will-change: opacity, transform;
+}
+
+/* Arrow graphic */
+.arrowIcon {
+  position: absolute;
+  top: 200px;
+  left: 480px;
+  z-index: 10;
+}
+
+/* Heading */
+.heading {
+  font-size: 35px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text-white);
+  letter-spacing: -0.01em;
+}
+
+/* "for $150" line */
+.price {
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.priceAccent {
+  color: var(--color-orange);
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* ── Stats mini-card ── */
+.statsCard {
+  position: relative;
+  background: #0f1923;
+  border-radius: 15px;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Top row: icon + label */
+.statsTop {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.statsIcon {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background: var(--color-orange);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-white);
+  font-size: 0.7rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.statsLabel {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+/* Bottom row: value + badge */
+.statsBottom {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.statsValue {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text-white);
+  letter-spacing: -0.02em;
+}
+
+.statsBadge {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-green);
+  background: rgba(34, 197, 94, 0.12);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+/* ── Responsive: mobile <768px — single column stack ── */
+@media (max-width: 767px) {
+  .wrapper {
+    margin-top: 0;          /* no overlap on mobile */
+    padding: 0 var(--space-4);
+  }
+
+  .card {
+    grid-template-columns: 1fr;
+    border-radius: 16px;
+  }
+
+  .imagePanel {
+    height: 240px;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .infoPanel {
+    border-radius: 0 0 16px 16px;
+    padding: 28px 24px;
+  }
+
+  .heading {
+    font-size: 22px;
+  }
+
+  .priceAccent {
+    font-size: 26px;
+  }
+}

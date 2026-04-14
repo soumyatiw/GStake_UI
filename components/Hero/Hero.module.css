@@ -1,0 +1,174 @@
+/* =========================================================
+   Hero.module.css
+   ========================================================= */
+
+/* ── Keyframes ── */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.04); }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Section shell ── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Background image */
+  background-image: url('/assets/bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* Prevent text from sliding under the fixed Navbar (68px) */
+  padding-top: 68px;
+  overflow: hidden;
+}
+
+/* ── Dark gradient overlay (pseudo-element keeps HTML clean) ── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 18, 30, 0.75) 0%,
+    rgba(10, 18, 30, 0.5)  50%,
+    rgba(10, 18, 30, 0.85) 100%
+  );
+  z-index: 0;
+}
+
+/* ── Content wrapper ── */
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-6);
+  padding: var(--space-12) var(--space-6);
+  max-width: 760px;
+  width: 100%;
+}
+
+/* ── Heading ── */
+.heading {
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--color-text-white);
+
+  /* JS sets initial state; CSS provides the base */
+  will-change: opacity, transform;
+}
+
+.accent {
+  color: var(--color-orange);
+}
+
+/* ── Subheading ── */
+.sub {
+  font-size: 16px;
+  color: var(--color-text-muted);
+  max-width: 480px;
+  line-height: 1.75;
+  text-align: center;
+  will-change: opacity, transform;
+}
+
+/* ── CTA button ── */
+.cta {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  border-radius: 9999px;
+  background: var(--color-orange);
+  color: var(--color-text-white);
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 24px rgba(249, 115, 22, 0.45);
+
+  /* Idle pulse animation */
+  animation: pulse 2s ease-in-out infinite;
+
+  will-change: transform;
+  transition:
+    background var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+/* Ripple */
+.cta::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(255, 255, 255, 0.3);
+  opacity: 0;
+  transform: scale(0);
+}
+
+.cta:not(:active)::after {
+  transform: scale(2);
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.cta:active::after {
+  transform: scale(0);
+  opacity: 1;
+  transition: 0s;
+}
+
+/* Stop the idle pulse on hover so scale(1.05) takes full control */
+.cta:hover {
+  animation: none;
+  background: var(--color-orange-dark);
+  transform: scale(1.05);
+  box-shadow: 0 8px 32px rgba(249, 115, 22, 0.6);
+}
+
+.cta:active {
+  transform: scale(0.98);
+}
+
+/* ── Responsive: mobile < 768px ── */
+@media (max-width: 767px) {
+  .heading {
+    font-size: 36px;
+    letter-spacing: -0.02em;
+  }
+
+  .content {
+    padding: var(--space-16) var(--space-4);
+    gap: var(--space-5);
+  }
+
+  .sub {
+    font-size: 15px;
+  }
+
+  .cta {
+    padding: 13px 28px;
+    font-size: 15px;
+  }
+}
